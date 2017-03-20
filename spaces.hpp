@@ -42,7 +42,9 @@ public:
 
 	virtual void enter();
 
-	virtual void explore();
+	virtual void turnExplore();
+
+	void explore();
 
 };
 #endif

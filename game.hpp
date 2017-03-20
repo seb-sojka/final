@@ -24,9 +24,10 @@ private:
 	Team comTeam;
 	Map gMap;
 	int days;
-	int actionCount;
-	int moveCount;
 	std::vector<Item*> inventory;
+	bool playerAlive = true;
+	bool hasKey = false;
+	bool won = false;
 public:
 	Game();
 	void setPlayerTeam();
@@ -38,6 +39,9 @@ public:
 	bool battle(Creature * creatureA, Creature * creatureB);
 	void lieEncounter();
 	void lookInv();
+	void fortEncounter();
+	void tradingPostMenu();
+	void rest();
 };
 
 

@@ -27,4 +27,7 @@ Rouge::Rouge()
 
 	//set defence dice to 2d6;
 	setDDice(getNumDDice(), dDie);
+
+	//Max health
+	maxHealth = getStrPoints();
 }

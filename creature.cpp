@@ -237,6 +237,11 @@ void Creature::baseDisplay()
 	std::cout << display;
 }
 
+void Creature::restore()
+{
+	setStrPoints(maxHealth);
+}
+
 /*bool operator==(Creature* a, Creature* b)
 {
 	return a->getName() == b->getName();

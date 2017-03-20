@@ -93,6 +93,9 @@ public:
 
 	bool isPLayerSpaceExplored();
 	bool liePLayerSameSpace();
+	bool fortPLayerSameSpace();
+
+	bool tradingPLayerSameSpace();
 
 	void lieDead();
 };

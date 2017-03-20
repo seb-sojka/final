@@ -347,3 +347,13 @@ void Team::removeHead()
 
 	
 }
+
+void Team::fullRestore()
+{
+	CreatNode *nPtr = head;
+	do
+	{
+		nPtr->creature->restore();;
+		nPtr = nPtr->next;
+	} while (nPtr != nullptr);
+}

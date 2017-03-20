@@ -21,6 +21,7 @@ protected:
 	std::string name;//Name
 	int armor;//Armor of creature
 	int strPoints;//Strength points
+	int maxHealth;
 public:
 	Creature();
 	int attackRoll();
@@ -52,6 +53,8 @@ public:
 	virtual void attack(Creature * defending);
 
 	void baseDisplay();
+
+	void restore();
 	
 	~Creature();
 

@@ -374,6 +374,16 @@ bool Map::liePLayerSameSpace()
 	return playerLocation->space->hasLie() == playerLocation->space->hasPlay();
 }
 
+bool Map::fortPLayerSameSpace()
+{
+	return fortLocation == playerLocation;
+}
+
+bool Map::tradingPLayerSameSpace()
+{
+	return northWest == playerLocation;
+}
+
 void Map::lieDead()
 {
 	lieAlive = false;

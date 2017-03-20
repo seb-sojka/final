@@ -16,9 +16,7 @@ class Fort :public Space
 public:
 	Fort();// Starts space as white
 
-	void encounterRoll(); //Places the ant on top of the space (does not change the color)
-
-	virtual void turnExplored(); //Turns color to the oppisite color
+	virtual void explre(); //Turns color to the oppisite color
 
 	void enter();
 

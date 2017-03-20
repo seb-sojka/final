@@ -111,7 +111,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="barbarian.hpp" />
-    <ClInclude Include="blueMen.hpp" />
     <ClInclude Include="board.hpp" />
     <ClInclude Include="cleric.hpp" />
     <ClInclude Include="combat.hpp" />
@@ -120,10 +119,8 @@
     <ClInclude Include="forest.hpp" />
     <ClInclude Include="fort.hpp" />
     <ClInclude Include="game.hpp" />
-    <ClInclude Include="hp.hpp" />
     <ClInclude Include="item.hpp" />
     <ClInclude Include="map.hpp" />
-    <ClInclude Include="medusa.hpp" />
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="random.hpp" />
     <ClInclude Include="rouge.hpp" />
@@ -131,11 +128,9 @@
     <ClInclude Include="team.hpp" />
     <ClInclude Include="trading.hpp" />
     <ClInclude Include="validator.hpp" />
-    <ClInclude Include="dracula.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="barbarian.cpp" />
-    <ClCompile Include="blueMen.cpp" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="cleric.cpp" />
     <ClCompile Include="combat.cpp" />
@@ -144,11 +139,9 @@
     <ClCompile Include="forest.cpp" />
     <ClCompile Include="fort.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="hp.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
-    <ClCompile Include="medusa.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="rouge.cpp" />
@@ -156,7 +149,6 @@
     <ClCompile Include="team.cpp" />
     <ClCompile Include="trading.cpp" />
     <ClCompile Include="validator.cpp" />
-    <ClCompile Include="dracula.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

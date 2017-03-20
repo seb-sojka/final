@@ -39,17 +39,6 @@ private:
 	CreatNode* head;//head pointer
 	CreatNode* tail;//tail pointer
 
-	/*struct Backpack
-	{
-		Item item;
-		Backpack* next;
-		Backpack* prev;
-		Backpack(Item ItemIn; Backpack* nextItem = nullptr)
-		{
-			item = itemIn;
-			item = NextItem;
-		};
-	};*/
 	
 
 public:
@@ -86,5 +75,6 @@ public:
 
 	void removeHead();
 
+	void fullRestore();
 };
 #endif
