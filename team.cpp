@@ -71,9 +71,9 @@ Team::~Team()
 		delete creaturesChoices[i];
 	}
 	delete[] creaturesChoices;
-	creaturesChoices = nullptr;*/
+	creaturesChoices = nullptr;
 	
-	//Deletes the linked list
+	//Deletes the linked list*/
 	CreatNode* nodePtr = head;
 	do
 	{

@@ -217,7 +217,7 @@ void Map::setPlayerLoc(SpaceNode* nodeIn)
 	playerLocation = nodeIn;
 }
 
-void Map::setFortLoc(SpaceNode * nodeIn)
+void Map::setFortLoc(SpaceNode* nodeIn)
 {
 	fortLocation = nodeIn;
 }

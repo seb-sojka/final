@@ -29,7 +29,7 @@ private:
 	Map gMap;
 	int days;
 	std::vector<Item*> inventory;
-	bool playerAlive = true;
+	bool playerAlive;
 	bool hasKey = false;
 	bool won = false;
 public:
@@ -52,6 +52,7 @@ public:
 	bool inventoryCheck();
 	void intro();
 	void displaySP(Creature* creatureA, Creature* creatureB);
+	void endGame();
 };
 
 

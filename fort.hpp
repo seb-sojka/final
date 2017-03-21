@@ -16,7 +16,7 @@ class Fort :public Space
 public:
 	Fort();// Starts space as white
 
-	void explore(); //Turns color to the oppisite color
+	void explore(); //Tfurns color to the oppisite color
 
 	void enter();
 

@@ -38,9 +38,12 @@ Game::Game()
 	//Ask player for action
 	playerAction();
 
+	playerAlive = true;
+
 	days = 0;
 	
-	//Look until either all pplayers characters are killer or 30 days
+	//Look until either all players characters are killer or 30 days or defeated the stag lord
+	std::cout << "Enter into do loop" << std::endl;
 	do
 	{
 		//Moves lieuanat
@@ -50,15 +53,21 @@ Game::Game()
 		//Ask player for action
 		playerAction();
 
-	} while (days <= 30 && !playerTeam.getLost());
+	} while (days <= 30 && !playerTeam.getLost()&&!won);
+	std::cout << "Got out of day loop" << std::endl;
+	endGame();
+
 }
 
 Game::~Game()
 {
+	std::cout << "End loop" << std::endl;
 	for (int i = 0; i < inventory.size(); i++)
 	{
-		delete inventory.at(i);
+		Item* trash = inventory.at(i);
+		delete trash;
 	}
+	std::cout << "End loop" << std::endl;
 }
 
 /****************************************************************************************
@@ -114,6 +123,7 @@ void Game::playerAction()
 	{
 		fortEncounter();
 	}
+	if(!won)
 	{
 
 			//creates menu asking what player wishes to do, explore land,
@@ -163,6 +173,7 @@ void Game::playerAction()
 			gMap.askMovePlayer();
 			
 		}
+	std::cout << "exiting player exit" << std::endl;
 }
 
 
@@ -243,7 +254,7 @@ bool Game::battle(Creature* creatureA, Creature* creatureB)
 			//creature is not dead, 2nd creature attacks
 			creatureB->attack(creatureA);
 		}
-
+		counter++;
 		//Asks about retreating after each attack or when on the creatures die		
 	} while ((!(creatureA->death()) && !(creatureB->death()) && counter<1000)&& retreatMenu.makeChoice() != 2);
 
@@ -380,13 +391,16 @@ void Game::fortEncounter()
 		bool retreat = fight();
 		if (!retreat&&playerAlive)
 		{
+			std::cout << "Killed Stag lord" << std::endl;
 			won = true;
+			gMap.setFortLoc(nullptr);
 		}
 	}
 	else
 	{
 		std::cout << "You realize a key will be needed to open the door and assault the fort" << std::endl;
 	}
+	std::cout << "Exited fort encounter" << std::endl;
 }
 
 
@@ -436,6 +450,7 @@ void Game::addItem(Item * itemIn)
 		this->removeItem();
 		addItem(itemIn);
 	}
+	return;
 }
 
 void Game::removeItem()
@@ -478,5 +493,21 @@ void Game::intro()
 void Game::displaySP(Creature * creatureA, Creature * creatureB)
 {
 	std::cout << creatureA->getName() << ": " << creatureA->getStrPoints() << "SP\t" << creatureB->getName() << ": " << creatureB->getStrPoints() << "SP" << std::endl;
+}
+
+void Game::endGame()
+{
+	if (won)
+	{
+		std::cout << "You win" << std::endl;
+	}
+	else if (days >= 30)
+	{
+		std::cout << "Lost from time" << std::endl;
+	}
+	else
+	{
+		std::cout << "Lost from death" << std::endl;
+	}
 }
 
