@@ -14,6 +14,10 @@
 #include "team.hpp"
 #include "item.hpp"
 #include "map.hpp"
+#include "key.hpp"
+#include "bandits.hpp"
+#include "lie.hpp"
+#include "stagLord.hpp"
 
 const int ITEMLIMIT = 10;
 
@@ -30,6 +34,7 @@ private:
 	bool won = false;
 public:
 	Game();
+	~Game();
 	void setPlayerTeam();
 	void setCompTeam(std::string);
 	void emptyComp();;
@@ -40,8 +45,13 @@ public:
 	void lieEncounter();
 	void lookInv();
 	void fortEncounter();
-	void tradingPostMenu();
+	int tradingPostMenu();
 	void rest();
+	void addItem(Item*);
+	void removeItem();
+	bool inventoryCheck();
+	void intro();
+	void displaySP(Creature* creatureA, Creature* creatureB);
 };
 
 

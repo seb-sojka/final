@@ -8,12 +8,10 @@
 #ifndef SOJKAS_TEAM_HPP
 #define SOJKAS_TEAM_HPP
 #include "barbarian.hpp"
-#include "dracula.hpp"
-#include "blueMen.hpp"
-#include "medusa.hpp"
 #include "rouge.hpp"
 #include "cleric.hpp"
-#include "hp.hpp"
+#include "bandits.hpp"
+#include "lie.hpp"
 #include "menu.hpp"
 
 class Team
@@ -76,5 +74,7 @@ public:
 	void removeHead();
 
 	void fullRestore();
+
+	void resetRage();
 };
 #endif

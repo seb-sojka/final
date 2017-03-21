@@ -7,8 +7,8 @@ Rouge::Rouge()
 	//sets armor to 1
 	setArmor(1);
 
-	//sets strength ppoints to 12
-	setStrPoints(20);
+	//sets strength ppoints to 15
+	setStrPoints(15);
 
 	//sets number of defence dice to 2
 	setNumDDice(2);

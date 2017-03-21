@@ -17,6 +17,8 @@
 *********************************************************************************************/
 Game::Game()
 {
+	//Intro
+	this->intro();
 	//Adds map to inventory	
 	inventory.push_back(new ItemMap());
 
@@ -29,12 +31,14 @@ Game::Game()
 
 	//Builds mao
 	gMap.initializeBoard();
-
+	
 	//Display map
 	gMap.displayMap();
 
 	//Ask player for action
 	playerAction();
+
+	days = 0;
 	
 	//Look until either all pplayers characters are killer or 30 days
 	do
@@ -42,13 +46,19 @@ Game::Game()
 		//Moves lieuanat
 		gMap.moveLie();
 
-		//Ask player where they want to move
-		gMap.askMovePlayer();
 
 		//Ask player for action
 		playerAction();
 
 	} while (days <= 30 && !playerTeam.getLost());
+}
+
+Game::~Game()
+{
+	for (int i = 0; i < inventory.size(); i++)
+	{
+		delete inventory.at(i);
+	}
 }
 
 /****************************************************************************************
@@ -71,11 +81,13 @@ void Game::setCompTeam(std::string stringIn)
 	emptyComp();
 	if (stringIn == "Lie")
 	{
-		comTeam.addCreat(new Barbarian());
+		comTeam.addCreat(new Bandit());
+		comTeam.addCreat(new Bandit());
+		comTeam.addCreat(new Lie());
 	}
 	else
 	{
-		comTeam.addCreat(new Cleric());
+		comTeam.addCreat(new Barbarian());
 	}
 }
 
@@ -97,15 +109,13 @@ void Game::playerAction()
 	if (gMap.isPLayerSpaceExplored() && gMap.liePLayerSameSpace())
 	{
 		lieEncounter();
-	}
-	else
+	} 
+	else if (gMap.isPLayerSpaceExplored() && gMap.fortPLayerSameSpace())
 	{
-		if (gMap.tradingPLayerSameSpace())
-		{
-			this->tradingPostMenu();
-		}
-		else
-		{
+		fortEncounter();
+	}
+	{
+
 			//creates menu asking what player wishes to do, explore land,
 			std::string choices[] = { "Explore land", "Look at invertory", "Move " };
 			Menu enterLand("What do you care to do?", choices, 3);
@@ -113,38 +123,48 @@ void Game::playerAction()
 			int userChoice = 0;
 			do
 			{
-				//Ask user what they wish to do
-				userChoice = enterLand.makeChoice();
-
-				if (userChoice == 1)
+				if (gMap.tradingPLayerSameSpace())
 				{
-					if (!gMap.isPLayerSpaceExplored())
+					userChoice = this->tradingPostMenu();
+				}
+				else
+				{
+					//Ask user what they wish to do
+					userChoice = enterLand.makeChoice();
+
+					if (userChoice == 1)
 					{
-						if (this->encounterRoll())
+						if (!gMap.isPLayerSpaceExplored())
 						{
-							std::cout << "Area still unexplored becuase of retreating" << std::endl;
+							if (this->encounterRoll())
+							{
+								std::cout << "Area still unexplored becuase of retreating" << std::endl;
+							}
+							else
+							{
+								gMap.playExpl();
+								days++;
+							}
 						}
 						else
 						{
-							gMap.playExpl();
-							days++;
+							std::cout << "Square is already explored." << std::endl;
 						}
 					}
-					else
+					else if (userChoice == 2)
 					{
-						std::cout << "Square is already explored." << std::endl;
+						lookInv();
 					}
-				}
-				else if (userChoice == 2)
-				{
-					lookInv();
 				}
 			} while (userChoice < 3);
 
 			gMap.displayMap();
+			//Ask player where they want to move
+			gMap.askMovePlayer();
+			
 		}
-	}
 }
+
 
 bool Game::encounterRoll()
 {
@@ -191,7 +211,7 @@ bool Game::fight()
 	} while (!(playerTeam.getLost() || comTeam.getLost())&& !retreat);
 
  
-
+	playerTeam.resetRage();
 	std::cout << std::endl;
 	//returns true if player retreated
 	return retreat;
@@ -206,12 +226,14 @@ bool Game::battle(Creature* creatureA, Creature* creatureB)
 {
 	bool returnBool = false;
 
+	
 	//Asks about retreating after each attack
 	std::string choices[] = { "Continue fight", "Retreat" };
 	Menu retreatMenu("Do you wish to continue fight or retreat?", choices, 2);
 	int counter = 0;
 	//Characters attack each in loop until one is dead or round limit.
 	do {
+		displaySP(creatureA, creatureB);
 		//First attack
 		creatureA->attack(creatureB);
 
@@ -230,7 +252,7 @@ bool Game::battle(Creature* creatureA, Creature* creatureB)
 	if (creatureA->death())
 	{
 		//Team A fighter lost
-		std::cout << creatureA->getName() << " was killed." << std::endl;
+		std::cout << creatureA->getName() << " was knocked out." << std::endl;
 
 		//Add to loser list
 		//addLoserList(creatureA);
@@ -266,9 +288,9 @@ bool Game::battle(Creature* creatureA, Creature* creatureB)
 ********************************************************************************************/
 void Game::lieEncounter()
 {
-	std::cout << "As you explore the area, you find yourself in front of well armed female with that looks the lieaunut of Stag Lord" << std::endl;
+	std::cout << "As you explore the area, you find yourself in front of a well-armed some bandits and well-armed female with that looks the lieutenant of Stag Lord" << std::endl;
 	std::cout << "\"You must be \'new\' adventurers that is looking for our bounty\", she says as she draws her two swords" << std::endl;
-	std::cout << "\"YOU WILL DEAD LIKE THE REST\", she scream as she attacks" << std::endl;
+	std::cout << "\"YOU WILL DEAD LIKE THE REST\", she screams as they attack you." << std::endl;
 	//Sets up lieaunut team
 	setCompTeam("Lie");
 
@@ -286,7 +308,9 @@ void Game::lieEncounter()
 		gMap.lieDead();
 
 		//adds keyto invertory.
-		//inventory.push_back(new Key());
+		inventory.push_back(new Key());
+
+		hasKey = true;
 	}
 }
 
@@ -319,17 +343,20 @@ void Game::lookInv()
 		userChoice = invMenu.makeChoice() - 1;
 
 		{
-			//If user chooses map
-			if (inventory.at(userChoice)->getName() == "Map")
+			if (userChoice != inventory.size())
 			{
+				//If user chooses map
+				if (inventory.at(userChoice)->getName() == "Map")
+				{
 
-				//Show player map
-				gMap.displayMap();
-			}
-			else
-			//Users get short discription of map
-			{
-				inventory.at(userChoice)->lookItem();
+					//Show player map
+					gMap.displayMap();
+				}
+				else
+					//Users get short discription of map
+				{
+					inventory.at(userChoice)->lookItem();
+				}
 			}
 		}
 	//exits if user selct exit
@@ -342,8 +369,13 @@ void Game::lookInv()
 ********************************************************************************************/
 void Game::fortEncounter()
 {
+	
 	if (hasKey)
 	{
+		std::cout << "You unlock the door and open door to the fort." << std::endl;
+		std::cout << "As you enter the fort, you hear a roar bellow out from inside." << std::endl;
+		std::cout << "A humanoid creature charges at the group. At least a head taller than all, he has the body of man but the head of stag." << std::endl;
+		std::cout << "Carrying a club as big as most deer, he readies to fight you all." << std::endl;
 		setCompTeam("Fort");
 		bool retreat = fight();
 		if (!retreat&&playerAlive)
@@ -353,27 +385,34 @@ void Game::fortEncounter()
 	}
 	else
 	{
-		std::cout << "As you appoach the fort, you see a huge lock holding the door shut" << std::endl;
-		std::cout << "You realize you must the key to the fort in order to assault the fort" << std::endl;
+		std::cout << "You realize a key will be needed to open the door and assault the fort" << std::endl;
 	}
 }
 
 
 /*****************************************************************************************
-** Description: Sets up encounter for the Stag Lord.
+** Description: When player is at the trading post
 ********************************************************************************************/
-void Game::tradingPostMenu()
+int Game::tradingPostMenu()
 {
 	//creates menu asking what player wishes to do,rest or move,
-	std::string choices[] = { "Rest", "Move" };
-	Menu trading("What do you care to do?", choices, 2);
+	std::string choices[] = { "Rest", "Look at invertory", "Move" };
+	Menu trading("What do you care to do?", choices, 3);
+	int userChoice = 0;
+	userChoice = trading.makeChoice();
 	//if player decides to rest, it takes a day 
-	if (trading.makeChoice() == 1)
+	if (userChoice == 1)
 	{
 		rest();
 		days++;
 	}
+		//Look at inverory
+	if (userChoice == 2)
+	{
+		lookInv();
+	}
 
+	return userChoice;
 }
 
 
@@ -384,3 +423,60 @@ void Game::rest()
 {
 	playerTeam.fullRestore();
 }
+
+void Game::addItem(Item * itemIn)
+{
+	if (inventoryCheck())
+	{
+		inventory.push_back(itemIn);
+	}
+	else
+	{
+		std::cout << "Your invertory is full. Please select item to remove" << std::endl;
+		this->removeItem();
+		addItem(itemIn);
+	}
+}
+
+void Game::removeItem()
+{
+	//Name of all the items
+	std::vector <std::string> items;
+
+
+	//Adds item name to vector of string
+	for (int i = 0; i < inventory.size(); i++)
+	{
+		items.push_back(inventory.at(i)->getName());
+	}
+
+	//Adds exit as an option 
+	items.push_back("Exit");
+
+	Menu rmMenu("What item do you wish to removet?", items);
+}
+
+bool Game::inventoryCheck()
+{
+	if (inventory.size() >= ITEMLIMIT)
+	{
+		return false;
+	}
+	return true;
+}
+
+void Game::intro()
+{
+	std::cout << "\"By the power invested by the Lords of Lance Coast, you are given the right to hunt Stag Lord and his bandits within the lost lands for thirty days." << std::endl
+		<< "Bring back the body of Stag lord for identification and your reward, \" said the note." << std::endl
+		<< "You have done this various times. Bring rouges and thugs to justice for a small sum of coins." << std::endl
+		<< " But this would be the big one. The Stag bandits and their leader only known as the Stag Lord, have been harassing the nearby towns and cities for some time now"
+		<< " but when the hit a local winery the outcry finally came for the lords instead of the peasants. You now have 30 days to find and kill the Stag Lord to get your reward." << std::endl;
+	setPlayerTeam();
+}
+
+void Game::displaySP(Creature * creatureA, Creature * creatureB)
+{
+	std::cout << creatureA->getName() << ": " << creatureA->getStrPoints() << "SP\t" << creatureB->getName() << ": " << creatureB->getStrPoints() << "SP" << std::endl;
+}
+

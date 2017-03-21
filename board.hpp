@@ -3,7 +3,7 @@
 ** Author: Sebastian Sojka
 ** Date: 1/23/2017
 ** Description: Creates board for simulation of Langton’s Ant. It includes the ant, the spaces, and board.
-** Creates the first emtpy board and places the ant on top of it. Also 
+** Creates the first emtpy board and places the ant on top of it. Also test
 ********************************************************************************************/
 
 #ifndef SOJKAS_MAP_HPP
@@ -55,6 +55,7 @@ private:
 	char fortHor;
 
 public:
+	~Map();
 	void initializeBoard(); //First build of the board
 	void createBoard(); //Creates a string of the board
 

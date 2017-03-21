@@ -1,3 +1,18 @@
-﻿  main.cpp
+﻿  stagLord.cpp
+  map.cpp
+  game.cpp
+d:\cs162\final project\final project\game.cpp(58): warning C4018: '<': signed/unsigned mismatch
+d:\cs162\final project\final project\game.cpp(195): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+d:\cs162\final project\final project\game.cpp(317): warning C4018: '<': signed/unsigned mismatch
+d:\cs162\final project\final project\game.cpp(438): warning C4018: '<': signed/unsigned mismatch
+  board.cpp
+d:\cs162\final project\final project\board.cpp(44): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  Compiling...
+  main.cpp
+  barbarian.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  team.cpp
   Final Project.vcxproj -> D:\CS162\Final Project\Final Project\Debug\Final Project.exe
   Final Project.vcxproj -> D:\CS162\Final Project\Final Project\Debug\Final Project.pdb (Partial PDB)

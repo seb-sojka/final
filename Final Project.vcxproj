@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="bandits.hpp" />
     <ClInclude Include="barbarian.hpp" />
     <ClInclude Include="board.hpp" />
     <ClInclude Include="cleric.hpp" />
@@ -120,16 +121,19 @@
     <ClInclude Include="game.hpp" />
     <ClInclude Include="item.hpp" />
     <ClInclude Include="key.hpp" />
+    <ClInclude Include="lie.hpp" />
     <ClInclude Include="map.hpp" />
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="random.hpp" />
     <ClInclude Include="rouge.hpp" />
     <ClInclude Include="spaces.hpp" />
+    <ClInclude Include="stagLord.hpp" />
     <ClInclude Include="team.hpp" />
     <ClInclude Include="trading.hpp" />
     <ClInclude Include="validator.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bandits.cpp" />
     <ClCompile Include="barbarian.cpp" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="cleric.cpp" />
@@ -140,12 +144,14 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="key.cpp" />
+    <ClCompile Include="lie.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="rouge.cpp" />
     <ClCompile Include="spaces.cpp" />
+    <ClCompile Include="stagLord.cpp" />
     <ClCompile Include="team.cpp" />
     <ClCompile Include="trading.cpp" />
     <ClCompile Include="validator.cpp" />

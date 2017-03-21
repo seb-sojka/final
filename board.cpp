@@ -9,6 +9,30 @@
 #include "board.hpp"
 #include <iostream>
 
+/***************************************************************
+**Descritpion: Default Destructor. Deletes the spaces to avoid leaks.
+************************************/
+Map::~Map()
+{
+	while (northWest != nullptr)
+	{
+		SpaceNode* nPtr = northWest;
+
+		while (nPtr->east != nullptr)
+		{
+			nPtr = northWest->east;
+		}
+
+		do
+		{
+			SpaceNode *trash = nPtr;
+
+			nPtr = nPtr->south;
+
+			delete trash;
+		} while (nPtr != nullptr);
+	}
+}
 
 /*****************************************************************
 ** Description: Creates the intial board with white spaces asking the user for
@@ -65,6 +89,8 @@ void Map::createBoard()
 			if (fortHor == nPtr->horLoc + 1 && fortVert == nPtr->vertLoc)
 			{
 				nPtr->east = new SpaceNode(new Fort());
+				setLieLoc(nPtr->south);
+				setFortLoc(nPtr->south);
 			}
 			else
 			{
@@ -89,6 +115,7 @@ void Map::createBoard()
 			{
 				nPtr->south = new SpaceNode(new Fort());
 				setLieLoc(nPtr->south);
+				setFortLoc(nPtr->south);
 			}
 			else
 			{
@@ -381,7 +408,8 @@ bool Map::tradingPLayerSameSpace()
 void Map::lieDead()
 {
 	lieAlive = false;
-	lieLocation = nullptr;
+	playerLocation->space->setLieu(false);
+	setLieLoc(nullptr);
 }
 
 void Map::showFort()

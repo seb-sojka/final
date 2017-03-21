@@ -7,7 +7,6 @@ Trading::Trading()
 	setDisplayChar('T');
 	setPlay(true);
 	setLieu(false);
-	this->enter();
 }
 
 
@@ -18,12 +17,6 @@ void Trading::explore()
 
 void Trading::enter()
 {
-
-}
-
-
-
-void Trading::encounterRoll()
-{
-	//No roll in trading post
+	std::cout << "You return Oblong's trading post." << std::endl;
+	std::cout << "His wife prepares a meal for you all and ask what he do for ya. Maybe so rest to recovery your strenght" << std::endl;
 }
