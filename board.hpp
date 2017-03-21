@@ -98,6 +98,7 @@ public:
 	bool tradingPLayerSameSpace();
 
 	void lieDead();
+	void showFort();
 };
 
 #endif

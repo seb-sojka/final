@@ -11,8 +11,10 @@ Fort::Fort()
 
 void Fort::explore()
 {
-	
+	std::cout << "You see the fort of the Stag Lord" << std::endl;
+	//Add more
 }
+
 
 void Fort::enter()
 {

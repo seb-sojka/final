@@ -11,7 +11,7 @@ Trading::Trading()
 }
 
 
-void Trading::turnExplored()
+void Trading::explore()
 {
 	//Already explored so nothing happens
 }

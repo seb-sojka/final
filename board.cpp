@@ -334,20 +334,14 @@ void Map::displayMap()
 			{
 				map += 'P';
 			}
-
-			if (nPtr->space->hasLie())
-			{
-				map += 'L';
-			}
-
-			//if (nPtr->space->isExplored())
+			else if (nPtr->space->isExplored())
 			{
 				map += nPtr->space->getDisplayChar();
 			}
-			/*else
+			else
 			{
 				map += ' ';
-			}*/
+			}
 			nPtr = nPtr->east;
 		}
 		map += "| \n";
@@ -388,4 +382,9 @@ void Map::lieDead()
 {
 	lieAlive = false;
 	lieLocation = nullptr;
+}
+
+void Map::showFort()
+{
+	fortLocation->space->setExplored(true);
 }

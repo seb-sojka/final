@@ -100,7 +100,7 @@ void Game::playerAction()
 	}
 	else
 	{
-		if (gMap.tradingPLayerSameSpace)
+		if (gMap.tradingPLayerSameSpace())
 		{
 			this->tradingPostMenu();
 		}
@@ -266,6 +266,9 @@ bool Game::battle(Creature* creatureA, Creature* creatureB)
 ********************************************************************************************/
 void Game::lieEncounter()
 {
+	std::cout << "As you explore the area, you find yourself in front of well armed female with that looks the lieaunut of Stag Lord" << std::endl;
+	std::cout << "\"You must be \'new\' adventurers that is looking for our bounty\", she says as she draws her two swords" << std::endl;
+	std::cout << "\"YOU WILL DEAD LIKE THE REST\", she scream as she attacks" << std::endl;
 	//Sets up lieaunut team
 	setCompTeam("Lie");
 
@@ -276,11 +279,14 @@ void Game::lieEncounter()
 	//you get the key to the fort
 	if (!retreat&&playerAlive)
 	{
+
+		gMap.showFort();
+
 		//Sets lieaunut to die
 		gMap.lieDead();
 
 		//adds keyto invertory.
-		inventory.push_back(new Key());
+		//inventory.push_back(new Key());
 	}
 }
 
@@ -342,8 +348,13 @@ void Game::fortEncounter()
 		bool retreat = fight();
 		if (!retreat&&playerAlive)
 		{
-			won == true;
+			won = true;
 		}
+	}
+	else
+	{
+		std::cout << "As you appoach the fort, you see a huge lock holding the door shut" << std::endl;
+		std::cout << "You realize you must the key to the fort in order to assault the fort" << std::endl;
 	}
 }
 

@@ -9,9 +9,9 @@ Forest::Forest()
 	setLieu(false);
 }
 
-void Forest::turnExplored()
+void Forest::explore()
 {
-	std::cout << "You explore the new area but do find anything of interest." << std::endl;
+	std::cout << "You explore the new area but do not find anything of interest." << std::endl;
 }
 
 void Forest::enter()

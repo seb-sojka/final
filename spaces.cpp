@@ -73,8 +73,3 @@ void Space::enter()
 	std::cout << "You enter into a new square of land.";
 	
 }
-
-void Space::explore()
-{
-	setExplored(true);
-}

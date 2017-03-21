@@ -18,7 +18,7 @@ public:
 
 	void encounterRoll(); //Places the ant on top of the space (does not change the color)
 
-	void turnExplored(); //Turns color to the oppisite color
+	void explore(); //Turns color to the oppisite color
 
 	void enter();
 };
