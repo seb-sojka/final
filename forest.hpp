@@ -16,7 +16,7 @@ class Forest :public Space
 public:
 	Forest();// Starts space as white
 
-	void turnExplored();
+	void explore();
 
 	void enter();
 

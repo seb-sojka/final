@@ -11,14 +11,18 @@ Fort::Fort()
 
 void Fort::explore()
 {
-	
+	setExplored(true);
+	std::cout << "You see the fort of the Stag Lord" << std::endl;
+	std::cout << "As you appoach the fort, you see a huge lock holding the door shut" << std::endl;
+	//Add more
 }
+
 
 void Fort::enter()
 {
 	if (this->isExplored())
 	{
-		std::cout << "As you travel over hill, you see the the Stag Lord's fort" << std::endl;
+		std::cout << "As you travel over hill, you see the the Stag Lord's fort as described on the map" << std::endl;
 	}
 	else
 	{

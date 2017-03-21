@@ -24,7 +24,7 @@ protected:
 	int maxHealth;
 public:
 	Creature();
-	int attackRoll();
+	virtual int attackRoll();
 	virtual int defence();
 
 	void setADice(int, Die);
@@ -55,6 +55,9 @@ public:
 	void baseDisplay();
 
 	void restore();
+
+	virtual void setRage(bool);
+	virtual bool getRage();
 	
 	~Creature();
 

@@ -40,11 +40,9 @@ public:
 	void setPlay(bool);
 	bool hasPlay();
 
-	virtual void enter();
+	virtual void enter() = 0;
 
-	virtual void turnExplore();
-
-	void explore();
+	virtual void explore() = 0;
 
 };
 #endif

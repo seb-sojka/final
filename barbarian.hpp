@@ -16,7 +16,7 @@
 
 class Barbarian :public Creature
 {
-private:
+protected:
 	bool rage;
 public:
 	Barbarian();

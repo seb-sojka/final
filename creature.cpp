@@ -242,6 +242,15 @@ void Creature::restore()
 	setStrPoints(maxHealth);
 }
 
+void Creature::setRage(bool)
+{
+}
+
+bool Creature::getRage()
+{
+	return false;
+}
+
 /*bool operator==(Creature* a, Creature* b)
 {
 	return a->getName() == b->getName();

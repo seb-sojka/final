@@ -357,3 +357,13 @@ void Team::fullRestore()
 		nPtr = nPtr->next;
 	} while (nPtr != nullptr);
 }
+
+void Team::resetRage()
+{
+	CreatNode *nPtr = head;
+	do
+	{
+		nPtr->creature->setRage(false);
+		nPtr = nPtr->next;
+	} while (nPtr != nullptr);
+}

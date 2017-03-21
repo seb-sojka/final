@@ -27,12 +27,6 @@ public:
 
 
 
-class Key : public Item
-{
-public:
-	Key();
-	void lookItem();
-	std::string useItem();
-};
+
 
 #endif
